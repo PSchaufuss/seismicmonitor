@@ -1,3 +1,20 @@
 spring:
   application:
     name: seismicmonitor
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/seismicmonitor
+    username: root
+    password: password
+
+  h2:
+    console:
+      enabled: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+server:
+  port: 8080

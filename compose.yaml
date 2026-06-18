@@ -1,0 +1,17 @@
+services:
+
+  mysql:
+    image: mysql:9.6.0
+    container_name: seismicmonitor-db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: seismicmonitor
+    ports:
+      - "3307:3306"
+
+  sensors:
+    image: ghcr.io/osman-butt/exam-seismic-simulator:latest
+    environment:
+      STUDENT_APP_BASE_URL: "http://host.docker.internal:8080"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
