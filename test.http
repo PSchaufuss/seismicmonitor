@@ -1,0 +1,16 @@
+POST http://localhost:8080/api/sensor-data
+Content-Type: application/json
+
+[
+  {
+    "readingId": "reading-1",
+    "sensorId": "sensor-a",
+    "sensorLocation": {
+      "latitude": 55.6761,
+      "longitude": 12.5683
+    },
+    "estimatedDistanceToEpicenterKm": 25.5,
+    "estimatedMagnitude": 4.3,
+    "recordedAt": "2026-06-18T15:00:00"
+  }
+]
