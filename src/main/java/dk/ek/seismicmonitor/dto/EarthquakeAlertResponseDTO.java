@@ -8,15 +8,17 @@ public class EarthquakeAlertResponseDTO {
     private double epicenterLatitude;
     private double epicenterLongitude;
     private double estimatedMagnitude;
+    private String geographicArea;
     private AlertStatus status;
     private int sensorReadingCount;
     private long userReportCount;
 
-    public EarthquakeAlertResponseDTO(Long id, double epicenterLatitude, double epicenterLongitude, double estimatedMagnitude, AlertStatus status, int sensorReadingCount, long userReportCount) {
+    public EarthquakeAlertResponseDTO(Long id, double epicenterLatitude, double epicenterLongitude, double estimatedMagnitude, String geographicArea, AlertStatus status, int sensorReadingCount, long userReportCount) {
         this.id = id;
         this.epicenterLatitude = epicenterLatitude;
         this.epicenterLongitude = epicenterLongitude;
         this.estimatedMagnitude = estimatedMagnitude;
+        this.geographicArea = geographicArea;
         this.status = status;
         this.sensorReadingCount = sensorReadingCount;
         this.userReportCount = userReportCount;
@@ -38,6 +40,10 @@ public class EarthquakeAlertResponseDTO {
         return estimatedMagnitude;
     }
 
+    public String getGeographicArea() {
+        return geographicArea;
+    }
+
     public AlertStatus getStatus() {
         return status;
     }
@@ -46,7 +52,7 @@ public class EarthquakeAlertResponseDTO {
         return sensorReadingCount;
     }
 
-    public long getUserReportCount(){
+    public long getUserReportCount() {
         return userReportCount;
     }
 }

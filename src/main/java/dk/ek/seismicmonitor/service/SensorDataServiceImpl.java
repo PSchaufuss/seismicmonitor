@@ -17,6 +17,7 @@ import dk.ek.seismicmonitor.service.calculation.EpicenterEstimator;
 import dk.ek.seismicmonitor.service.calculation.Location;
 import dk.ek.seismicmonitor.service.calculation.LocationWithDistance;
 import dk.ek.seismicmonitor.service.calculation.MagnitudeCalculator;
+import dk.ek.seismicmonitor.service.geocoding.ReverseGeocodingService;
 
 import org.springframework.stereotype.Service;
 
@@ -32,13 +33,15 @@ public class SensorDataServiceImpl implements SensorDataService {
     private final EarthquakeAlertRepository earthquakeAlertRepository;
     private final EpicenterEstimator epicenterEstimator;
     private final MagnitudeCalculator magnitudeCalculator;
+    private final ReverseGeocodingService reverseGeocodingService;
 
-    public SensorDataServiceImpl(SensorRepository sensorRepository, SensorReadingRepository sensorReadingRepository, EarthquakeAlertRepository earthquakeAlertRepository, EpicenterEstimator epicenterEstimator, MagnitudeCalculator magnitudeCalculator) {
+    public SensorDataServiceImpl(SensorRepository sensorRepository, SensorReadingRepository sensorReadingRepository, EarthquakeAlertRepository earthquakeAlertRepository, EpicenterEstimator epicenterEstimator, MagnitudeCalculator magnitudeCalculator, ReverseGeocodingService reverseGeocodingService) {
         this.sensorRepository = sensorRepository;
         this.sensorReadingRepository = sensorReadingRepository;
         this.earthquakeAlertRepository = earthquakeAlertRepository;
         this.epicenterEstimator = epicenterEstimator;
         this.magnitudeCalculator = magnitudeCalculator;
+        this.reverseGeocodingService = reverseGeocodingService;
     }
 
     @Override
@@ -108,10 +111,14 @@ public class SensorDataServiceImpl implements SensorDataService {
             Location epicenter = epicenterEstimator.estimate(measurements);
             double magnitude = magnitudeCalculator.calculateAverageMagnitude(validReadings);
 
+            String geographicArea = reverseGeocodingService.findGeographicArea(epicenter.latitude(), epicenter.longitude()
+            );
+
             EarthquakeAlert alert = new EarthquakeAlert(
                     epicenter.latitude(),
                     epicenter.longitude(),
                     magnitude,
+                    geographicArea,
                     AlertStatus.UNDER_REVIEW
             );
 
@@ -151,6 +158,7 @@ public class SensorDataServiceImpl implements SensorDataService {
                         alert.getEpicenterLatitude(),
                         alert.getEpicenterLongitude(),
                         alert.getEstimatedMagnitude(),
+                        alert.getGeographicArea(),
                         alert.getStatus(),
                         alert.getSensorReadings().size(),
                         alert.getUserReports().size()
