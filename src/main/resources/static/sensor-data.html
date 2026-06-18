@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Sensor Data</title>
+</head>
+<body>
+<h1>Raw sensor readings</h1>
+
+<button onclick="loadSensorData()">Load sensor readings</button>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Reading ID</th>
+        <th>Sensor ID</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Distance km</th>
+        <th>Magnitude</th>
+        <th>Recorded at</th>
+    </tr>
+    </thead>
+    <tbody id="sensor-data-table">
+    </tbody>
+</table>
+
+<script src="sensor-data.js"></script>
+</body>
+</html>
