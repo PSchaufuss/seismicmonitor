@@ -21,6 +21,9 @@ public class SensorReading {
     @ManyToOne
     private Sensor sensor;
 
+    @ManyToOne
+    private EarthquakeAlert earthquakeAlert;
+
     public SensorReading(){}
 
     public SensorReading(String readingId, double estimatedDistanceToEpicenterKm, double estimatedMagnitude, LocalDateTime recordedAt, Sensor sensor){
@@ -73,5 +76,13 @@ public class SensorReading {
 
     public void setSensor(Sensor sensor) {
         this.sensor = sensor;
+    }
+
+    public EarthquakeAlert getEarthquakeAlert(){
+        return earthquakeAlert;
+    }
+
+    public void setEarthquakeAlert(EarthquakeAlert earthquakeAlert){
+        this.earthquakeAlert = earthquakeAlert;
     }
 }
