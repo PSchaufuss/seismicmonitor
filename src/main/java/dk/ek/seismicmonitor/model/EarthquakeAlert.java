@@ -16,6 +16,7 @@ public class EarthquakeAlert {
     private double epicenterLatitude;
     private double epicenterLongitude;
     private double estimatedMagnitude;
+    private String geographicArea;
 
     @Enumerated(EnumType.STRING)
     private AlertStatus status;
@@ -28,10 +29,15 @@ public class EarthquakeAlert {
 
     public EarthquakeAlert(){}
 
-    public EarthquakeAlert(double epicenterLatitude, double epicenterLongitude, double estimatedMagnitude, AlertStatus status) {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public EarthquakeAlert(double epicenterLatitude, double epicenterLongitude, double estimatedMagnitude, String geographicArea, AlertStatus status) {
         this.epicenterLatitude = epicenterLatitude;
         this.epicenterLongitude = epicenterLongitude;
         this.estimatedMagnitude = estimatedMagnitude;
+        this.geographicArea = geographicArea;
         this.status = status;
     }
 
@@ -85,6 +91,14 @@ public class EarthquakeAlert {
 
     public void setUserReports(List<UserReport> userReports) {
         this.userReports = userReports;
+    }
+
+    public String getGeographicArea() {
+        return geographicArea;
+    }
+
+    public void setGeographicArea(String geographicArea) {
+        this.geographicArea = geographicArea;
     }
 
 }

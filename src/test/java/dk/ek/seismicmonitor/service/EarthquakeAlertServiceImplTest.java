@@ -34,7 +34,7 @@ class EarthquakeAlertServiceImplTest {
 
     @Test
     void updateAlertStatusFromUnderReviewToActiveIsAllowed() {
-        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, AlertStatus.UNDER_REVIEW);
+        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, "Copenhagen", AlertStatus.UNDER_REVIEW);
 
         when(earthquakeAlertRepository.findById(1L)).thenReturn(Optional.of(alert));
         when(earthquakeAlertRepository.save(any(EarthquakeAlert.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -47,7 +47,7 @@ class EarthquakeAlertServiceImplTest {
 
     @Test
     void updateAlertStatusFromUnderReviewToFalseAlarmIsAllowed() {
-        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, AlertStatus.UNDER_REVIEW);
+        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, "Copenhagen", AlertStatus.UNDER_REVIEW);
 
         when(earthquakeAlertRepository.findById(1L)).thenReturn(Optional.of(alert));
         when(earthquakeAlertRepository.save(any(EarthquakeAlert.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -60,7 +60,7 @@ class EarthquakeAlertServiceImplTest {
 
     @Test
     void updateAlertStatusFromActiveToNotActiveIsAllowed() {
-        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, AlertStatus.ACTIVE);
+        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, "Copenhagen", AlertStatus.ACTIVE);
 
         when(earthquakeAlertRepository.findById(1L)).thenReturn(Optional.of(alert));
         when(earthquakeAlertRepository.save(any(EarthquakeAlert.class))).thenAnswer(invocation -> invocation.getArgument(0));
@@ -73,7 +73,7 @@ class EarthquakeAlertServiceImplTest {
 
     @Test
     void updateAlertStatusFromFalseAlarmIsNotAllowed() {
-        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, AlertStatus.FALSE_ALARM);
+        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, "Copenhagen", AlertStatus.FALSE_ALARM);
 
         when(earthquakeAlertRepository.findById(1L)).thenReturn(Optional.of(alert));
 
@@ -85,7 +85,7 @@ class EarthquakeAlertServiceImplTest {
 
     @Test
     void updateAlertStatusFromNotActiveIsNotAllowed() {
-        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, AlertStatus.NOT_ACTIVE);
+        EarthquakeAlert alert = new EarthquakeAlert(55.0, 12.0, 3.5, "Copenhagen", AlertStatus.NOT_ACTIVE);
 
         when(earthquakeAlertRepository.findById(1L)).thenReturn(Optional.of(alert));
 

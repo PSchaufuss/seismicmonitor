@@ -22,17 +22,29 @@ function showAlerts(alerts) {
             <td>${alert.epicenterLatitude}</td>
             <td>${alert.epicenterLongitude}</td>
             <td>${alert.estimatedMagnitude}</td>
+            <td>${alert.geographicArea ?? 'Unknown'}</td>
             <td>${alert.status}</td>
             <td>${alert.sensorReadingCount}</td>
             <td>${alert.userReportCount}</td>
             <td>
-                <button onclick="updateStatus(${alert.id}, 'ACTIVE')">Set ACTIVE</button>
-                <button onclick="updateStatus(${alert.id}, 'FALSE_ALARM')">Set FALSE_ALARM</button>
-                <button onclick="updateStatus(${alert.id}, 'NOT_ACTIVE')">Set NOT_ACTIVE</button>
-                <button onclick="createUserReport(${alert.id})">Report intensity 5</button>
-                <button onclick="loadUserReports(${alert.id})">Show reports</button>
-                <button onclick="loadSensorReadings(${alert.id})">Show readings</button>
-            </td>
+    <div class="action-group">
+        <strong>Status:</strong>
+        <button onclick="updateStatus(${alert.id}, 'ACTIVE')">Approve alert</button>
+        <button onclick="updateStatus(${alert.id}, 'FALSE_ALARM')">Mark false alarm</button>
+        <button onclick="updateStatus(${alert.id}, 'NOT_ACTIVE')">Mark not active</button>
+    </div>
+
+    <div class="action-group">
+        <strong>User:</strong>
+        <button onclick="createUserReport(${alert.id})">Report shaking intensity 5</button>
+        <button onclick="loadUserReports(${alert.id})">Show user reports</button>
+    </div>
+
+    <div class="action-group">
+        <strong>Admin:</strong>
+        <button onclick="loadSensorReadings(${alert.id})">Show sensor readings</button>
+    </div>
+</td>
         `;
 
         tableBody.appendChild(row);

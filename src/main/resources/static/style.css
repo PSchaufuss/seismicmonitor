@@ -1,0 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 24px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 16px;
+}
+
+th, td {
+    border: 1px solid #cccccc;
+    padding: 8px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #eeeeee;
+}
+
+button {
+    margin: 3px;
+    padding: 4px 8px;
+}
+
+.action-group {
+    margin-bottom: 8px;
+}

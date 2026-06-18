@@ -42,6 +42,7 @@ public class EarthquakeAlertControllerTest {
                 55.6761,
                 12.5683,
                 4.3,
+                "Copenhagen",
                 AlertStatus.UNDER_REVIEW,
                 3,
                 0
@@ -54,7 +55,8 @@ public class EarthquakeAlertControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1))
                 .andExpect(jsonPath("$[0].status").value("UNDER_REVIEW"))
-                .andExpect(jsonPath("$[0].sensorReadingCount").value(3));
+                .andExpect(jsonPath("$[0].sensorReadingCount").value(3))
+                .andExpect(jsonPath("$[0].geographicArea").value("Copenhagen"));
     }
 
     @Test
@@ -64,6 +66,7 @@ public class EarthquakeAlertControllerTest {
                 55.6761,
                 12.5683,
                 4.3,
+                "Copenhagen",
                 AlertStatus.ACTIVE,
                 3,
                 2
@@ -75,7 +78,8 @@ public class EarthquakeAlertControllerTest {
         mockMvc.perform(get("/api/earthquake-alerts/active"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].status").value("ACTIVE"))
-                .andExpect(jsonPath("$[0].userReportCount").value(2));
+                .andExpect(jsonPath("$[0].userReportCount").value(2))
+                .andExpect(jsonPath("$[0].geographicArea").value("Copenhagen"));
     }
 
     @Test
@@ -85,6 +89,7 @@ public class EarthquakeAlertControllerTest {
                 55.6761,
                 12.5683,
                 4.3,
+                "Copenhagen",
                 AlertStatus.ACTIVE,
                 3,
                 0

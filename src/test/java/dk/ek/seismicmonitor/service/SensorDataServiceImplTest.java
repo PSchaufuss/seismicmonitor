@@ -17,6 +17,7 @@ import dk.ek.seismicmonitor.model.EarthquakeAlert;
 import dk.ek.seismicmonitor.model.Sensor;
 import dk.ek.seismicmonitor.model.SensorReading;
 import dk.ek.seismicmonitor.service.calculation.Location;
+import dk.ek.seismicmonitor.service.geocoding.ReverseGeocodingService;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
@@ -47,6 +48,9 @@ class SensorDataServiceImplTest {
     @Mock
     private MagnitudeCalculator magnitudeCalculator;
 
+    @Mock
+    private ReverseGeocodingService reverseGeocodingService;
+
     @InjectMocks
     private SensorDataServiceImpl sensorDataService;
 
@@ -58,6 +62,7 @@ class SensorDataServiceImplTest {
         when(epicenterEstimator.estimate(anyList())).thenReturn(new Location(55.5, 12.5));
         when(magnitudeCalculator.calculateAverageMagnitude(anyList())).thenReturn(3.7);
         when(earthquakeAlertRepository.save(any(EarthquakeAlert.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(reverseGeocodingService.findGeographicArea(55.5, 12.5)).thenReturn("Copenhagen");
 
         List<SensorDataRequestDTO> request = List.of(
                 createRequest("READ-001", "SEN-001", 55.1, 12.1, 40.0, 3.5),
@@ -75,10 +80,12 @@ class SensorDataServiceImplTest {
         assertEquals(55.5, savedAlert.getEpicenterLatitude());
         assertEquals(12.5, savedAlert.getEpicenterLongitude());
         assertEquals(3.7, savedAlert.getEstimatedMagnitude());
+        assertEquals("Copenhagen", savedAlert.getGeographicArea());
         assertEquals(AlertStatus.UNDER_REVIEW, savedAlert.getStatus());
 
         verify(epicenterEstimator, times(1)).estimate(anyList());
         verify(magnitudeCalculator, times(1)).calculateAverageMagnitude(anyList());
+        verify(reverseGeocodingService, times(1)).findGeographicArea(55.5, 12.5);
 
 
     }
@@ -152,6 +159,7 @@ class SensorDataServiceImplTest {
         when(epicenterEstimator.estimate(anyList())).thenReturn(new Location(55.5, 12.5));
         when(magnitudeCalculator.calculateAverageMagnitude(anyList())).thenReturn(3.7);
         when(earthquakeAlertRepository.save(any(EarthquakeAlert.class))).thenAnswer(invocation -> invocation.getArgument(0));
+        when(reverseGeocodingService.findGeographicArea(55.5, 12.5)).thenReturn("Copenhagen");
 
         List<SensorDataRequestDTO> request = List.of(
                 createRequest("READ-001", "SEN-001", 55.1, 12.1, 40.0, 3.5),

@@ -37,6 +37,7 @@ public class EarthquakeAlertServiceImpl implements EarthquakeAlertService{
                         alert.getEpicenterLatitude(),
                         alert.getEpicenterLongitude(),
                         alert.getEstimatedMagnitude(),
+                        alert.getGeographicArea(),
                         alert.getStatus(),
                         alert.getSensorReadings().size(),
                         alert.getUserReports().size()
@@ -53,6 +54,7 @@ public class EarthquakeAlertServiceImpl implements EarthquakeAlertService{
                         alert.getEpicenterLatitude(),
                         alert.getEpicenterLongitude(),
                         alert.getEstimatedMagnitude(),
+                        alert.getGeographicArea(),
                         alert.getStatus(),
                         alert.getSensorReadings().size(),
                         alert.getUserReports().size()
@@ -79,6 +81,7 @@ public class EarthquakeAlertServiceImpl implements EarthquakeAlertService{
                 savedAlert.getEpicenterLatitude(),
                 savedAlert.getEpicenterLongitude(),
                 savedAlert.getEstimatedMagnitude(),
+                savedAlert.getGeographicArea(),
                 savedAlert.getStatus(),
                 savedAlert.getSensorReadings().size(),
                 savedAlert.getUserReports().size()
