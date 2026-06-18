@@ -1,7 +1,9 @@
 package dk.ek.seismicmonitor.controller;
 
+import dk.ek.seismicmonitor.dto.EarthquakeAlertResponseDTO;
 import dk.ek.seismicmonitor.dto.SensorDataRequestDTO;
 import dk.ek.seismicmonitor.dto.SensorReadingResponseDTO;
+import dk.ek.seismicmonitor.model.EarthquakeAlert;
 import dk.ek.seismicmonitor.service.SensorDataService;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,5 +27,10 @@ public class SensorDataController {
     @GetMapping
     public List<SensorReadingResponseDTO> getAllSensorReadings(){
         return sensorDataService.getAllSensorReadings();
+    }
+
+    @GetMapping("/earthquake-alerts")
+    public List<EarthquakeAlertResponseDTO> getAllEarthquakeAlerts(){
+        return sensorDataService.getAllEarthquakeAlerts();
     }
 }
