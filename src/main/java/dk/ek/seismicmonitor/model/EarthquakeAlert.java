@@ -23,6 +23,9 @@ public class EarthquakeAlert {
     @OneToMany(mappedBy = "earthquakeAlert")
     private List<SensorReading> sensorReadings = new ArrayList<>();
 
+    @OneToMany(mappedBy = "earthquakeAlert")
+    private List<UserReport> userReports = new ArrayList<>();
+
     public EarthquakeAlert(){}
 
     public EarthquakeAlert(double epicenterLatitude, double epicenterLongitude, double estimatedMagnitude, AlertStatus status) {
@@ -74,6 +77,14 @@ public class EarthquakeAlert {
 
     public void setSensorReadings(List<SensorReading> sensorReadings) {
         this.sensorReadings = sensorReadings;
+    }
+
+    public List<UserReport> getUserReports() {
+        return userReports;
+    }
+
+    public void setUserReports(List<UserReport> userReports) {
+        this.userReports = userReports;
     }
 
 }
