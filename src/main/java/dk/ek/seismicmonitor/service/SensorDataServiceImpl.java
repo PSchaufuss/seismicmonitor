@@ -47,12 +47,29 @@ public class SensorDataServiceImpl implements SensorDataService {
         List<SensorReading> savedReadingsFromThisRequest = new ArrayList<>();
 
         for (SensorDataRequestDTO dto : sensorDataList) {
+
+            final double latitude = dto.getSensorLocation() != null
+                    ? dto.getSensorLocation().getLatitude()
+                    : 0.0;
+
+            final double longitude = dto.getSensorLocation() != null
+                    ? dto.getSensorLocation().getLongitude()
+                    : 0.0;
+
+            LocalDateTime recordedAt = null;
+
+            try {
+                recordedAt = LocalDateTime.parse(dto.getRecordedAt());
+            } catch (Exception e) {
+
+            }
+
             Sensor sensor = sensorRepository
                     .findBySensorId(dto.getSensorId())
                     .orElseGet(() -> new Sensor(
                             dto.getSensorId(),
-                            dto.getSensorLocation().getLatitude(),
-                            dto.getSensorLocation().getLongitude()
+                            latitude,
+                            longitude
                     ));
 
             sensor = sensorRepository.save(sensor);
@@ -61,7 +78,7 @@ public class SensorDataServiceImpl implements SensorDataService {
                     dto.getReadingId(),
                     dto.getEstimatedDistanceToEpicenterKm(),
                     dto.getEstimatedMagnitude(),
-                    LocalDateTime.parse(dto.getRecordedAt()),
+                    recordedAt,
                     sensor
             );
 
@@ -135,7 +152,8 @@ public class SensorDataServiceImpl implements SensorDataService {
                         alert.getEpicenterLongitude(),
                         alert.getEstimatedMagnitude(),
                         alert.getStatus(),
-                        alert.getSensorReadings().size()
+                        alert.getSensorReadings().size(),
+                        alert.getUserReports().size()
                 ))
                 .toList();
     }

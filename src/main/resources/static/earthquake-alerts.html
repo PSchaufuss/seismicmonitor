@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>Earthquake Alerts</title>
+</head>
+<body>
+<h1>Earthquake alerts</h1>
+
+<button onclick="loadAllAlerts()">Load all alerts</button>
+<button onclick="loadActiveAlerts()">Load active alerts</button>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Magnitude</th>
+        <th>Status</th>
+        <th>Sensor readings</th>
+        <th>User reports</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="alerts-table">
+    </tbody>
+</table>
+
+<h2>User reports</h2>
+<div id="user-reports"></div>
+
+<h2>Sensor readings for alert</h2>
+<div id="alert-sensor-readings"></div>
+
+<script src="earthquake-alerts.js"></script>
+</body>
+</html>
