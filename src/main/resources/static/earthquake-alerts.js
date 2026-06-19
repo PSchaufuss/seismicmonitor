@@ -1,5 +1,11 @@
 async function loadAllAlerts() {
     const response = await fetch('/api/earthquake-alerts');
+
+    if (response.status === 403) {
+        alert('Access denied: This function requires ADMIN role.');
+        return;
+    }
+
     const alerts = await response.json();
     showAlerts(alerts);
 }
@@ -101,4 +107,4 @@ async function loadSensorReadings(alertId) {
     });
 }
 
-loadAllAlerts();
+loadActiveAlerts();

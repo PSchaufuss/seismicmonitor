@@ -11,6 +11,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -35,6 +36,7 @@ public class EarthquakeAlertControllerTest {
     @MockitoBean
     private EarthquakeAlertService earthquakeAlertService;
 
+    @WithMockUser(roles = "ADMIN")
     @Test
     public void getAllAlerts_Success() throws Exception {
         EarthquakeAlertResponseDTO alert = new EarthquakeAlertResponseDTO(
@@ -59,6 +61,7 @@ public class EarthquakeAlertControllerTest {
                 .andExpect(jsonPath("$[0].geographicArea").value("Copenhagen"));
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     public void getActiveAlerts_Success() throws Exception {
         EarthquakeAlertResponseDTO alert = new EarthquakeAlertResponseDTO(
@@ -82,6 +85,7 @@ public class EarthquakeAlertControllerTest {
                 .andExpect(jsonPath("$[0].geographicArea").value("Copenhagen"));
     }
 
+    @WithMockUser(roles = "ADMIN")
     @Test
     public void updateAlertStatus_Success() throws Exception {
         EarthquakeAlertResponseDTO alert = new EarthquakeAlertResponseDTO(
@@ -106,6 +110,7 @@ public class EarthquakeAlertControllerTest {
         verify(earthquakeAlertService).updateAlertStatus(1L, AlertStatus.ACTIVE);
     }
 
+    @WithMockUser(roles = "USER")
     @Test
     public void createUserReport_Success() throws Exception {
         UserReportResponseDTO report = new UserReportResponseDTO(

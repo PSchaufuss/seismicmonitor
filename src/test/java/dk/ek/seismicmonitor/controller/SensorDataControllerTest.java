@@ -9,6 +9,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -56,6 +57,7 @@ public class SensorDataControllerTest {
         verify(sensorDataService).saveSensorData(org.mockito.ArgumentMatchers.anyList());
     }
 
+    @WithMockUser(roles = "ADMIN")
     @Test
     public void getAllSensorReadings_Success() throws Exception{
         SensorReadingResponseDTO reading = new SensorReadingResponseDTO(
